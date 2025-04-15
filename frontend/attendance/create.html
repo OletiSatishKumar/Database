@@ -1,53 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Attendance</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      main {
+        width: 100%; /* Ensure it takes full available width */
+        max-width: 600px; /* Limit the width to 1000px */
+        margin: 30px auto;
+        background-color: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box; /* Include padding in the width calculation */
+      }
+
+      h1 {
+        text-align: center;
+        color: #4caf50;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: grid;
+        grid-gap: 20px;
+      }
+
+      form div {
+        display: flex;
+        flex-direction: column;
+      }
+
+      form label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      form select,
+      form input[type="date"] {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+      }
+
+      form button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      form button:hover {
+        background-color: #45a049;
+      }
+
+      .message {
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 15px;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .message.success {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .message.error {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+    </style>
+  </head>
+  <body>
     <header>
-        <h1>Add Attendance</h1>
-        <nav>
-            <a href="index.html">Back to Attendance</a> |
-            <a href="../index.html">Home</a>
-        </nav>
+      <h1>Add Attendance</h1>
+      <nav>
+        <a href="index.html">Back to Attendance</a> |
+        <a href="../index.html">Home</a>
+      </nav>
     </header>
     <main>
-        <form id="addAttendanceForm">
-            <div>
-                <label for="student_id">Student:</label>
-                <select id="student_id" name="student_id" required>
-                    <option value="">Select Student</option>
-                </select>
-            </div>
-            <div>
-                <label for="course_id">Course:</label>
-                <select id="course_id" name="course_id" required>
-                    <option value="">Select Course</option>
-                </select>
-            </div>
-            <div>
-                <label for="date">Date:</label>
-                <input type="date" id="date" name="date" required>
-            </div>
-            <div>
-                <label for="status">Status:</label>
-                <select id="status" name="status" required>
-                    <option value="">Select Status</option>
-                    <option value="Present">Present</option>
-                    <option value="Absent">Absent</option>
-                </select>
-            </div>
-            <button type="submit">Add Attendance</button>
-            <div id="message" class="message"></div>
-        </form>
+      <form id="addAttendanceForm">
+        <div>
+          <label for="student_id">Student:</label>
+          <select id="student_id" name="student_id" required>
+            <option value="">Select Student</option>
+          </select>
+        </div>
+        <div>
+          <label for="course_id">Course:</label>
+          <select id="course_id" name="course_id" required>
+            <option value="">Select Course</option>
+          </select>
+        </div>
+        <div>
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required />
+        </div>
+        <div>
+          <label for="status">Status:</label>
+          <select id="status" name="status" required>
+            <option value="">Select Status</option>
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+          </select>
+        </div>
+        <button type="submit">Add Attendance</button>
+        <div id="message" class="message"></div>
+      </form>
     </main>
     <footer>
-        <p>&copy; 2025 College Database System</p>
+      <p>&copy; 2025 College Database System</p>
     </footer>
     <script src="create.js"></script>
-</body>
+  </body>
 </html>

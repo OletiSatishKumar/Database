@@ -1,41 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Courses Report</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faculty Courses Report</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    th, td {
+      padding: 14px 18px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #004d40;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+      transition: 0.3s;
+    }
+
+    td[colspan="5"] {
+      color: #777;
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Faculty Courses Report</h1>
-        <nav>
-            <a href="index.html">Back to Reports</a> |
-            <a href="../index.html">Home</a>
-        </nav>
-    </header>
-    <main>
-        <table id="reportTable">
-            <thead>
-                <tr>
-                    <th>Faculty ID</th>
-                    <th>Faculty Name</th>
-                    <th>Email</th>
-                    <th>Course ID</th>
-                    <th>Course Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="5">Loading report data...</td>
-                </tr>
-            </tbody>
-        </table>
-    </main>
-    <footer>
-        <p>&copy; 2025 College Database System</p>
-    </footer>
-    <script src="faculty-courses.js"></script>
+  <header>
+    <h1>Faculty Courses Report</h1>
+    <nav>
+      <a href="index.html">Back to Reports</a> |
+      <a href="../index.html">Home</a>
+    </nav>
+  </header>
+  <main>
+    <table id="reportTable">
+      <thead>
+        <tr>
+          <th>Faculty ID</th>
+          <th>Faculty Name</th>
+          <th>Email</th>
+          <th>Course ID</th>
+          <th>Course Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="5">Loading report data...</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+  <footer>
+    <p>&copy; 2025 College Database System</p>
+  </footer>
+  <script src="faculty-courses.js"></script>
 </body>
 </html>

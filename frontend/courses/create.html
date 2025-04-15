@@ -1,81 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add New Course</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      main {
+        width: 100%; /* Ensure it takes full available width */
+        max-width: 600px; /* Limit the width to 1000px */
+        margin: 30px auto;
+        background-color: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box; /* Include padding in the width calculation */
+      }
+
+      h1 {
+        text-align: center;
+        color: #4caf50;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: grid;
+        grid-gap: 20px;
+      }
+
+      form div {
+        display: flex;
+        flex-direction: column;
+      }
+
+      form label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      form input[type="text"],
+      form input[type="number"] {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+      }
+
+      form button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      form button:hover {
+        background-color: #45a049;
+      }
+
+      .message {
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 15px;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .message.success {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .message.error {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+    </style>
+  </head>
+  <body>
     <header>
-        <h1>Add New Course</h1>
-        <nav>
-            <a href="index.html">Back to Courses</a> |
-            <a href="../index.html">Home</a>
-        </nav>
+      <h1>Add New Course</h1>
+      <nav>
+        <a href="index.html">Back to Courses</a> |
+        <a href="../index.html">Home</a>
+      </nav>
     </header>
     <main>
-        <form id="addCourseForm">
-            <div>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div>
-                <label for="department">Department:</label>
-                <input type="text" id="department" name="department">
-            </div>
-            <div>
-                <label for="credits">Credits:</label>
-                <input type="number" id="credits" name="credits">
-            </div>
-            <button type="submit">Add Course</button>
-            <div id="message" class="message"></div>
-        </form>
+      <form id="addCourseForm">
+        <div>
+          <label for="name">Course Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div>
+          <label for="department">Department:</label>
+          <input type="text" id="department" name="department" />
+        </div>
+        <div>
+          <label for="credits">Credits:</label>
+          <input type="number" id="credits" name="credits" required />
+        </div>
+        <button type="submit">Add Course</button>
+        <div id="message" class="message"></div>
+      </form>
     </main>
     <footer>
-        <p>&copy; 2025 College Database System</p>
+      <p>&copy; 2025 College Database System</p>
     </footer>
     <script>
-        document.getElementById('addCourseForm').addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const form = event.target;
-            const formData = {
-                name: form.name.value,
-                department: form.department.value,
-                credits: parseInt(form.credits.value)
-            };
+      document
+        .getElementById("addCourseForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const form = event.target;
+          const formData = {
+            name: form.name.value,
+            department: form.department.value,
+            credits: parseInt(form.credits.value),
+          };
 
-            try {
-                const response = await fetch('http://localhost:3000/api/courses', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                });
+          try {
+            const response = await fetch("http://localhost:3000/api/courses", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
 
-                const result = await response.json();
-                const messageDiv = document.getElementById('message');
+            const result = await response.json();
+            const messageDiv = document.getElementById("message");
 
-                if (response.ok) {
-                    messageDiv.className = 'message success';
-                    messageDiv.textContent = result.message;
-                    form.reset();
-                    setTimeout(() => {
-                        window.location.href = 'index.html';
-                    }, 1500);
-                } else {
-                    messageDiv.className = 'message error';
-                    messageDiv.textContent = result.error || 'Failed to add course.';
-                }
-            } catch (error) {
-                console.error('Error adding course:', error);
-                const messageDiv = document.getElementById('message');
-                messageDiv.className = 'message error';
-                messageDiv.textContent = `Error adding course: ${error.message}`;
+            if (response.ok) {
+              messageDiv.className = "message success";
+              messageDiv.textContent = result.message;
+              form.reset(); // Clear the form
+              setTimeout(() => {
+                window.location.href = "index.html"; // Redirect back to course list
+              }, 1500);
+            } else {
+              messageDiv.className = "message error";
+              messageDiv.textContent = result.error || "Failed to add course.";
             }
+          } catch (error) {
+            console.error("Error adding course:", error);
+            const messageDiv = document.getElementById("message");
+            messageDiv.className = "message error";
+            messageDiv.textContent = `Error adding course: ${error.message}`;
+          }
         });
     </script>
-</body>
+  </body>
 </html>

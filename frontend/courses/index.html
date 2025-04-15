@@ -5,7 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Courses</title>
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        button {
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -16,10 +53,24 @@
         </nav>
     </header>
     <main>
-        <h2>Course List</h2>
-        <ul id="courseList">
-            <li>Loading courses...</li>
-        </ul>
+        <center><h2>Course List</h2></center>
+        <table id="courseTable">
+            <thead>
+                <tr>
+                    <th>Course Id</th>
+                    <th>Course Name</th>
+                    <th>Department</th>
+                    <th>Faculty ID</th>
+                    <th>Credits</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="courseList">
+                <tr>
+                    <td colspan="4">Loading courses...</td>
+                </tr>
+            </tbody>
+        </table>
     </main>
     <footer>
         <p>&copy; 2025 College Database System</p>

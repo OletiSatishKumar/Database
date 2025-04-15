@@ -1,49 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management</title>
-    <link rel="stylesheet" href="../css/style.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Students</title>
+    <link rel="stylesheet" href="../css//style.css" />
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
 
-<body>
-    <header class="header">
-        <div class="container">
-            <h1>Student Management</h1>
-            <nav class="navbar">
-                <a href="../index.html">Home</a>
-                <a href="create.html">Add New Student</a>
-            </nav>
-        </div>
+      table,
+      th,
+      td {
+        border: 1px solid #ccc;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f4f4f4;
+      }
+
+      button {
+        padding: 5px 10px;
+        font-size: 14px;
+        cursor: pointer;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Student Management</h1>
+      <nav>
+        <a href="../index.html">Home</a> |
+        <a href="create.html">Add New Student</a>
+      </nav>
     </header>
-
-    <main class="main-content">
-        <div class="container">
-            <h2>Student List</h2>
-            <table class="styled-table" id="studentList">
-                <thead>
-                    <tr>
-                        <th>Student ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Course</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="5">Loading students...</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <main>
+      <center><h2>Student List</h2></center>
+      <table id="studentTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="studentList">
+          <tr>
+            <td colspan="5">...</td>
+          </tr>
+        </tbody>
+      </table>
     </main>
-
-    <footer class="footer">
-        <p>© 2025 College Database System</p>
+    <footer>
+      <p>&copy; 2025 College Database System</p>
     </footer>
-
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

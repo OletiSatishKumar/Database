@@ -7,7 +7,7 @@ const facultyRoutes = require('./routes/faculty.routes');
 const enrollmentRoutes = require('./routes/enrollment.routes');
 const attendanceRoutes = require('./routes/attendance.routes');
 const reportRoutes = require('./routes/reports.routes'); 
-const resultsRoutes = require('./routes/results.routes'); 
+const resultsRoutes = require('./routes/results.routes');
 
 const app = express();
 const port = 3000;
@@ -20,6 +20,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // Routes
 app.use('/api/students', studentRoutes);

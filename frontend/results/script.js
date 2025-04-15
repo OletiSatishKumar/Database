@@ -12,26 +12,31 @@ async function loadResults() {
         displayResults(results);
     } catch (error) {
         console.error('Error loading results:', error);
-        document.getElementById('resultsList').innerHTML = `<li class="error">Error loading results: ${error.message}</li>`;
+        document.getElementById('resultsList').innerHTML = `<tr><td colspan="4" class="error">Error loading results: ${error.message}</td></tr>`;
     }
 }
 
 function displayResults(results) {
-    const resultsList = document.getElementById('resultsList');
-    resultsList.innerHTML = '';
+    const resultsTableBody = document.getElementById('resultsList');
+    resultsTableBody.innerHTML = ''; // Clear the loading message
+
     results.forEach(result => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-            <span>${result.student_name} - ${result.course_name} - Marks: ${result.marks} - Grade: ${result.grade}</span>
-            <div class="actions">
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${result.student_name}</td>
+            <td>${result.course_name}</td>
+            <td>${result.marks}</td>
+            <td>${result.grade}</td>
+            <td>
                 <button onclick="editResult(${result.result_id})">Edit</button>
                 <button onclick="deleteResult(${result.result_id})">Delete</button>
-            </div>
+            </td>
         `;
-        resultsList.appendChild(listItem);
+        resultsTableBody.appendChild(row);
     });
+
     if (results.length === 0) {
-        resultsList.innerHTML = '<li>No results found.</li>';
+        resultsTableBody.innerHTML = '<tr><td colspan="5">No results found.</td></tr>';
     }
 }
 

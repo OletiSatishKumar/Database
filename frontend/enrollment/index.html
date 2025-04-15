@@ -1,29 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Enrollment</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ccc;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f4f4f4;
+      }
+
+      button {
+        padding: 5px 10px;
+        font-size: 14px;
+        cursor: pointer;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
     <header>
-        <h1>Enrollment</h1>
-        <nav>
-            <a href="../index.html">Home</a> |
-            <a href="create.html">Add Enrollment</a>
-        </nav>
+      <h1>Enrollment</h1>
+      <nav>
+        <a href="../index.html">Home</a> |
+        <a href="create.html">Add Enrollment</a>
+      </nav>
     </header>
     <main>
-        <h2>Enrollment List</h2>
-        <ul id="enrollmentList">
-            <li>Loading enrollments...</li>
-        </ul>
+      <center><h2>Enrollment List</h2></center>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Student Name</th>
+            <th>Course Name</th>
+            <th>Semester</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="enrollmentList">
+          <tr>
+            <td colspan="5">Loading enrollments...</td>
+          </tr>
+        </tbody>
+      </table>
     </main>
     <footer>
-        <p>&copy; 2025 College Database System</p>
+      <p>&copy; 2025 College Database System</p>
     </footer>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
