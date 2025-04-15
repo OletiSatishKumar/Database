@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Edit Student</h1>
+        <nav>
+            <a href="index.html">Back to Students</a> |
+            <a href="../index.html">Home</a>
+        </nav>
+    </header>
+    <main>
+        <form id="editStudentForm">
+            <input type="hidden" id="studentId" name="studentId">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob">
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department">
+            </div>
+            <button type="submit">Update Student</button>
+            <div id="message" class="message"></div>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 College Database System</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStudentDetails();
+        });
+
+        async function loadStudentDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const studentId = urlParams.get('id');
+            if (studentId) {
+                try {
+                    const response = await fetch(`http://localhost:3000/api/students/${studentId}`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const student = await response.json();
+                    document.getElementById('studentId').value = student.student_id;
+                    document.getElementById('name').value = student.name || '';
+                    document.getElementById('dob').value = student.dob || '';
+                    document.getElementById('email').value = student.email || '';
+                    document.getElementById('department').value = student.department || '';
+                } catch (error) {
+                    console.error('Error fetching student details:', error);
+                    document.getElementById('message').className = 'message error';
+                    document.getElementById('message').textContent = `Error fetching student details: ${error.message}`;
+                }
+            } else {
+                document.getElementById('message').className = 'message error';
+                document.getElementById('message').textContent = 'Invalid student ID.';
+            }
+        }
+
+        document.getElementById('editStudentForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const studentId = document.getElementById('studentId').value;
+            const formData = {
+                name: form.name.value,
+                dob: form.dob.value,
+                email: form.email.value,
+                department: form.department.value
+            };
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/students/${studentId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                const result = await response.json();
+                const messageDiv = document.getElementById('message');
+
+                if (response.ok) {
+                    messageDiv.className = 'message success';
+                    messageDiv.textContent = result.message;
+                    setTimeout(() => {
+                        window.location.href = 'index.html'; // Redirect back to student list
+                    }, 1500);
+                } else {
+                    messageDiv.className = 'message error';
+                    messageDiv.textContent = result.error || 'Failed to update student.';
+                }
+            } catch (error) {
+                console.error('Error updating student:', error);
+                const messageDiv = document.getElementById('message');
+                messageDiv.className = 'message error';
+                messageDiv.textContent = `Error updating student: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Summary</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Attendance Summary by Course</h1>
+        <nav>
+            <a href="index.html">Back to Reports</a> |
+            <a href="../index.html">Home</a>
+        </nav>
+    </header>
+    <main>
+        <form id="attendanceSummaryForm">
+            <div>
+                <label for="course_id">Select Course:</label>
+                <select id="course_id" name="course_id" required>
+                    <option value="">Select Course</option>
+                </select>
+            </div>
+            <button type="submit">Generate Report</button>
+        </form>
+        <div id="reportContainer" style="display: none;">
+            <h2>Attendance Summary</h2>
+            <table id="reportTable">
+                <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Date</th>
+                        <th>Present</th>
+                        <th>Absent</th>
+                        <th>Total Students</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="6">No data available</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="message" class="message"></div>
+    </main>
+    <footer>
+        <p>&copy; 2025 College Database System</p>
+    </footer>
+    <script src="attendance-summary.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Course</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Edit Course</h1>
+        <nav>
+            <a href="index.html">Back to Courses</a> |
+            <a href="../index.html">Home</a>
+        </nav>
+    </header>
+    <main>
+        <form id="editCourseForm">
+            <input type="hidden" id="courseId" name="courseId">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department">
+            </div>
+            <div>
+                <label for="credits">Credits:</label>
+                <input type="number" id="credits" name="credits">
+            </div>
+            <button type="submit">Update Course</button>
+            <div id="message" class="message"></div>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 College Database System</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCourseDetails();
+        });
+
+        async function loadCourseDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('id');
+            if (courseId) {
+                try {
+                    const response = await fetch(`http://localhost:3000/api/courses/${courseId}`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const course = await response.json();
+                    document.getElementById('courseId').value = course.course_id;
+                    document.getElementById('name').value = course.name || '';
+                    document.getElementById('department').value = course.department || '';
+                    document.getElementById('credits').value = course.credits || '';
+                } catch (error) {
+                    console.error('Error fetching course details:', error);
+                    document.getElementById('message').className = 'message error';
+                    document.getElementById('message').textContent = `Error fetching course details: ${error.message}`;
+                }
+            } else {
+                document.getElementById('message').className = 'message error';
+                document.getElementById('message').textContent = 'Invalid course ID.';
+            }
+        }
+
+        document.getElementById('editCourseForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const courseId = document.getElementById('courseId').value;
+            const formData = {
+                name: form.name.value,
+                department: form.department.value,
+                credits: parseInt(form.credits.value)
+            };
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/courses/${courseId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                const result = await response.json();
+                const messageDiv = document.getElementById('message');
+
+                if (response.ok) {
+                    messageDiv.className = 'message success';
+                    messageDiv.textContent = result.message;
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                } else {
+                    messageDiv.className = 'message error';
+                    messageDiv.textContent = result.error || 'Failed to update course.';
+                }
+            } catch (error) {
+                console.error('Error updating course:', error);
+                const messageDiv = document.getElementById('message');
+                messageDiv.className = 'message error';
+                messageDiv.textContent = `Error updating course: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

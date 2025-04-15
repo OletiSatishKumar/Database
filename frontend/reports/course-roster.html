@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Roster</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Course Roster</h1>
+        <nav>
+            <a href="index.html">Back to Reports</a> |
+            <a href="../index.html">Home</a>
+        </nav>
+    </header>
+    <main>
+         <form id="courseRosterForm">
+            <div>
+                <label for="course_id">Select Course:</label>
+                <select id="course_id" name="course_id" required>
+                    <option value="">Select Course</option>
+                </select>
+            </div>
+            <button type="submit">Generate Report</button>
+        </form>
+        <div id="reportContainer" style="display: none;">
+            <h2>Course Roster</h2>
+            <table id="reportTable">
+                <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">No data available</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="message" class="message"></div>
+    </main>
+    <footer>
+        <p>&copy; 2025 College Database System</p>
+    </footer>
+    <script src="course-roster.js"></script>
+</body>
+</html>

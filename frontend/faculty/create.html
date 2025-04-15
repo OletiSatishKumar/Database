@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Faculty</title>
+    <link rel="stylesheet" href="../css/style.css">
+     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Add Faculty</h1>
+        <nav>
+            <a href="index.html">Back to Faculty</a> |
+            <a href="../index.html">Home</a>
+        </nav>
+    </header>
+    <main>
+        <form id="addFacultyForm">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department" required>
+            </div>
+            <button type="submit">Add Faculty</button>
+            <div id="message" class="message"></div>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 College Database System</p>
+    </footer>
+    <script src="create.js"></script>
+</body>
+</html>

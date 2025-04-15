@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Enrollment</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Edit Enrollment</h1>
+        <nav>
+            <a href="index.html">Back to Enrollment</a> |
+            <a href="../index.html">Home</a>
+        </nav>
+    </header>
+    <main>
+        <form id="editEnrollmentForm">
+            <input type="hidden" id="enrollment_id" name="enrollment_id">
+            <div>
+                <label for="student_id">Student:</label>
+                <select id="student_id" name="student_id" required>
+                    <option value="">Select Student</option>
+                </select>
+            </div>
+            <div>
+                <label for="course_id">Course:</label>
+                <select id="course_id" name="course_id" required>
+                    <option value="">Select Course</option>
+                </select>
+            </div>
+            <div>
+                <label for="enrollment_date">Enrollment Date:</label>
+                <input type="date" id="enrollment_date" name="enrollment_date" required>
+            </div>
+            <button type="submit">Update Enrollment</button>
+            <div id="message" class="message"></div>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 College Database System</p>
+    </footer>
+    <script src="edit.js"></script>
+</body>
+</html>

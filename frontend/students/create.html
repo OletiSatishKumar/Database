@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Student</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Add New Student</h1>
+      <nav>
+        <a href="index.html">Back to Students</a> |
+        <a href="../index.html">Home</a>
+      </nav>
+    </header>
+    <main>
+      <form id="addStudentForm">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div>
+          <label for="dob">Date of Birth:</label>
+          <input type="date" id="dob" name="dob" />
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div>
+          <label for="department">Department:</label>
+          <input type="text" id="department" name="department" />
+        </div>
+        <button type="submit">Add Student</button>
+        <div id="message" class="message"></div>
+      </form>
+    </main>
+    <footer>
+      <p>&copy; 2025 College Database System</p>
+    </footer>
+    <script>
+      document
+        .getElementById("addStudentForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const form = event.target;
+          const formData = {
+            name: form.name.value,
+            dob: form.dob.value,
+            email: form.email.value,
+            department: form.department.value,
+          };
+
+          try {
+            const response = await fetch("http://localhost:3000/api/students/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
+
+            const result = await response.json();
+            const messageDiv = document.getElementById("message");
+
+            if (response.ok) {
+              messageDiv.className = "message success";
+              messageDiv.textContent = result.message;
+              form.reset(); // Clear the form
+              setTimeout(() => {
+                window.location.href = "index.html"; // Redirect back to student list
+              }, 1500);
+            } else {
+              messageDiv.className = "message error";
+              messageDiv.textContent = result.error || "Failed to add student.";
+            }
+          } catch (error) {
+            console.error("Error adding student:", error);
+            const messageDiv = document.getElementById("message");
+            messageDiv.className = "message error";
+            messageDiv.textContent = `Error adding student: ${error.message}`;
+          }
+        });
+    </script>
+  </body>
+</html>
